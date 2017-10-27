@@ -1,26 +1,29 @@
-//============================================================================
-// Name        : exercise_13.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
-#include <iostream>
-
+/*
+ * Dirhandler.cpp
+ *
+ *  Created on: 27 Oct 2017
+ *      Author: Tobias
+ */
 #include <dirent.h>
-
+#include <iostream>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
 #include <string.h>
 
-using namespace std;
+#include "Dir_handler.h"
 
-/*
- * Formats a struct timespec into a buffer.
- */
-int timespec2str(char *buf, uint len, struct timespec *ts) {
+Dir_handler::Dir_handler(const char* Path) {
+	path = Path;
+
+}
+
+Dir_handler::~Dir_handler() {
+	// TODO Auto-generated destructor stub
+}
+
+int Dir_handler::timespec2str(char *buf, uint len, struct timespec *ts) {
 	/*
 	 * grabbed from http://stackoverflow.com/questions/8304259/formattingstruct-
 	 timespec
@@ -39,7 +42,7 @@ int timespec2str(char *buf, uint len, struct timespec *ts) {
 	return 0;
 }
 
-void show_folder_content(const char* path) {
+void Dir_handler::show_folder_content() {
 	const uint TIME_FMT = strlen("2012-12-31 12:59:59.123456789") + 1;
 	struct stat buf;
 	char timespec[TIME_FMT];
@@ -62,11 +65,3 @@ void show_folder_content(const char* path) {
 
 	}
 }
-
-int main(int argc, char ** argv) {
-
-const char* path = "/home/Tobias/workspace/exercise_13";
-show_folder_content(path);
-return 0;
-}
-
