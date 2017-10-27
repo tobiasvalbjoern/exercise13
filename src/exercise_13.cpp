@@ -8,29 +8,33 @@
 #include <string>
 #include <iostream>
 #include <dirent.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
-void ls_function(const char* path)
+
+void get_info(struct stat *buf, const char* path)
 {
 
-	DIR *dir;
-	struct dirent *ent;
-	if ((dir = opendir (path)) != NULL) {
-	  // print all the files and directories within directory
-	  while ((ent = readdir (dir)) != NULL) {
-	    printf ("%s\n", ent->d_name);
-	  }
-	  closedir (dir);
-	} else {
-	  // could not open directory
-	  perror ("Could not open file");
 
-	}
+	stat(path,buf);
 
+}
+
+void show_stats(struct stat *buf, const char* path){
+
+	printf("file: %s\n",path);
+	printf("Size: %ld bits\n", buf->st_size);
 
 }
 
 int main(int argc, char ** argv) {
-	const char* path="/home/Tobias/workspace/exercise_13";
-	ls_function(path);
+	struct stat buf;
+	const char* path = "/home/Tobias/workspace/exercise_13/Debug/test.txt";
+
+	get_info(&buf, path);
+	show_stats(&buf,path);
 	return 0;
 }
+
+
