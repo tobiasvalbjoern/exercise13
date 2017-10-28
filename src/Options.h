@@ -1,26 +1,40 @@
 #ifndef OPTIONS_H_
 #define OPTIONS_H_
 #include <string>
-
+#include <vector>
 
 using namespace std;
+
+/*Abstract parent class for opt_word and opt_char.*/
 class Options
 {
 public:
-    Options(); // Default constuctor needed if a global object is created
-    Options (int argc, char const ** argv);
+    Options();
     virtual ~Options(){};
-    bool setArguments (int argc, const char **argv); // Needed if the default constuctor was used
+    bool setArguments (int argc,const char **argv);
+
     void setOptstring(string &validopt);
-	virtual string getopt(void) = 0;	//=0 makes the class abstract
-	int numopt(void);
+
+	//abstract method. It is implemented in Opt_char and Opt_word.
+    virtual string getopt(void) = 0;
+
+    /*Returns number of validoptions found.*/
+    int numopt(void);
+
+    /*This function can be used to get a path on the cmd line that is given
+     * after a valid option, like -f /home/documents/, depending on the path */
+	string get_path();
 
 protected: 				//protected vars are inherrited as private
-	int argC,count;
-	const char **argV;
+	int argC;
+	vector<string> argV{};
 
+	//get_opt uses this counter to remember the position it reached
+	//on commandline before returning the string.
+	int count;
 
-	string optstring;	//optstring is to be tested against in getopt()
+	//a container for the valid option(s)
+	string optstring;
 
 };
 

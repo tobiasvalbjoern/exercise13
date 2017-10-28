@@ -2,7 +2,7 @@
  * Dirhandler.cpp
  *
  *  Created on: 27 Oct 2017
- *      Author: Tobias
+ *      Author: Tobias Valbjørn and Anders Reiche.
  */
 #include <dirent.h>
 #include <iostream>
@@ -11,10 +11,11 @@
 #include <unistd.h>
 
 #include <string.h>
+#include <string>
 
 #include "Dir_handler.h"
 
-Dir_handler::Dir_handler(const char* Path) {
+Dir_handler::Dir_handler(string Path) {
 	path = Path;
 
 }
@@ -43,14 +44,24 @@ int Dir_handler::timespec2str(char *buf, uint len, struct timespec *ts) {
 }
 
 void Dir_handler::show_folder_content() {
-	const uint TIME_FMT = strlen("2012-12-31 12:59:59.123456789") + 1;
+
 	struct stat buf;
+
+	const uint TIME_FMT = strlen("2012-12-31 12:59:59.123456789") + 1;
 	char timespec[TIME_FMT];
+
 	DIR *dir;
-	struct dirent *ent;
-	if ((dir = opendir(path)) != NULL) {
-		// print all the files and directories within directory
+	/*Our path is a string. We need to make a const char* to the opendir.*/
+	const char* result = strcpy((char*)malloc(path.length()+1), path.c_str());
+	if ((dir = opendir(result)) != NULL) {
 		printf("     name\t      size (bytes)\t   last modified\n");
+
+		/* For now we don't need the info from the stats.
+		 * So there is no need to save them. If we wanted we could
+		 * store the info from the stat in a linked list, return it.
+		 * and use it in a different "metode" that displayed the info.
+		 */
+		struct dirent *ent;
 		while ((ent = readdir(dir)) != NULL) {
 			stat(ent->d_name, &buf);
 			printf("%10s\t", ent->d_name);
@@ -58,10 +69,11 @@ void Dir_handler::show_folder_content() {
 			timespec2str(timespec, sizeof(timespec), &buf.st_mtim);
 			printf("%10s\n", timespec);
 		}
+		free ((char*)result);
 		closedir(dir);
 	} else {
 		// could not open directory
-		perror("Could not open file");
-
+		perror("Could not open directory");
+		throw(-4);
 	}
 }

@@ -4,26 +4,26 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/Dirhandler.cpp \
-../src/FileHandler.cpp \
-../src/OptChars.cpp \
-../src/OptWord.cpp \
+../src/Dir_handler.cpp \
+../src/Log.cpp \
+../src/Opt_chars.cpp \
+../src/Opt_word.cpp \
 ../src/Options.cpp \
 ../src/main.cpp 
 
 OBJS += \
-./src/Dirhandler.o \
-./src/FileHandler.o \
-./src/OptChars.o \
-./src/OptWord.o \
+./src/Dir_handler.o \
+./src/Log.o \
+./src/Opt_chars.o \
+./src/Opt_word.o \
 ./src/Options.o \
 ./src/main.o 
 
 CPP_DEPS += \
-./src/Dirhandler.d \
-./src/FileHandler.d \
-./src/OptChars.d \
-./src/OptWord.d \
+./src/Dir_handler.d \
+./src/Log.d \
+./src/Opt_chars.d \
+./src/Opt_word.d \
 ./src/Options.d \
 ./src/main.d 
 

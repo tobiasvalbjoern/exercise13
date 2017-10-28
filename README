@@ -1,0 +1,24 @@
+Du bruger programmet ved at skrive:
+./exercise_13
+
+efterfulgt af de gyldige optioner du har sat i programmet. 
+På nuværende tidspunkt er der sat nogle forskellige optioner,
+der kan bruges til single dash og double dash, for at vise, at 
+det er en mulighed at give flere optioner, end de enkelte, der er 
+funktioner til. 
+
+Følgende funktionalitet er implementeret:
+
+Vis indhold af directory:
+-d path/ --dir path 
+Path er en sti til den givne directory. 
+
+Vis indhold af log fil og sæt et timestamp:
+--log path
+
+Error numbers:
+-1 = no arguments
+-2 = no options given on commandline
+-3 = no filename given
+-4 = could not open directory.
+-5 coould not open file.
