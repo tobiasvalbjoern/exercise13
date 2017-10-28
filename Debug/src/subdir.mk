@@ -9,7 +9,7 @@ CPP_SRCS += \
 ../src/OptChars.cpp \
 ../src/OptWord.cpp \
 ../src/Options.cpp \
-../src/exercise_13.cpp 
+../src/main.cpp 
 
 OBJS += \
 ./src/Dirhandler.o \
@@ -17,7 +17,7 @@ OBJS += \
 ./src/OptChars.o \
 ./src/OptWord.o \
 ./src/Options.o \
-./src/exercise_13.o 
+./src/main.o 
 
 CPP_DEPS += \
 ./src/Dirhandler.d \
@@ -25,7 +25,7 @@ CPP_DEPS += \
 ./src/OptChars.d \
 ./src/OptWord.d \
 ./src/Options.d \
-./src/exercise_13.d 
+./src/main.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
