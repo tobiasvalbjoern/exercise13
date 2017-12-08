@@ -25,7 +25,7 @@ public:
      * after a valid option, like -f /home/documents/, depending on the path */
 	string get_path();
 
-protected: 				//protected vars are inherrited as private
+protected: 
 	int argC;
 	vector<string> argV{};
 
